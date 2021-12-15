@@ -21,14 +21,14 @@ class AddToCalendar {
   /// [frequencyType] optional enum that states the frequency. Daily, weekly, monthly
   ///
   static Future addToCalendar({
-    @required String title,
-    @required DateTime startTime,
-    DateTime endTime,
+    required String? title,
+    required DateTime? startTime,
+    DateTime? endTime,
     bool isAllDay = false,
-    String location,
-    String description,
-    int frequency,
-    FrequencyType frequencyType,
+    String? location,
+    String? description,
+    int? frequency,
+    FrequencyType? frequencyType,
   }) {
     assert(title != null && title.isNotEmpty);
     assert(startTime != null);
@@ -37,8 +37,8 @@ class AddToCalendar {
     assert(frequencyType != null && frequency != null || frequencyType == null && frequency == null);
     return channel.invokeMethod('addToCalendar', <String, dynamic>{
       'title': title,
-      'startTime': startTime.toUtc().millisecondsSinceEpoch,
-      'endTime': isAllDay ? startTime.toUtc().millisecondsSinceEpoch : endTime.toUtc().millisecondsSinceEpoch,
+      'startTime': startTime!.toUtc().millisecondsSinceEpoch,
+      'endTime': isAllDay ? startTime!.toUtc().millisecondsSinceEpoch : endTime!.toUtc().millisecondsSinceEpoch,
       'isAllDay': isAllDay,
       'location': location,
       'description': description,

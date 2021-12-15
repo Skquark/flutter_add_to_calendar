@@ -7,13 +7,13 @@ import 'package:mockito/mockito.dart';
 class MockMethodChannel extends Mock implements MethodChannel {}
 
 void main() {
-  MockMethodChannel mockChannel;
+  MockMethodChannel? mockChannel;
 
   setUp(() {
     TestWidgetsFlutterBinding.ensureInitialized();
     mockChannel = MockMethodChannel();
     AddToCalendar.channel.setMockMethodCallHandler((MethodCall call) async {
-      mockChannel.invokeMethod(call.method, call.arguments);
+      mockChannel!.invokeMethod(call.method, call.arguments);
     });
   });
 
@@ -103,7 +103,7 @@ void main() {
   test('adds to calendar when defined all day and not giving endTime', () async {
     final dateTime = DateTime.now();
     await AddToCalendar.addToCalendar(title: 'title', startTime: dateTime, isAllDay: true);
-    verify(mockChannel.invokeMethod('addToCalendar', <String, dynamic>{
+    verify(mockChannel!.invokeMethod('addToCalendar', <String, dynamic>{
       'title': 'title',
       'startTime': dateTime.toUtc().millisecondsSinceEpoch,
       // all day event by default defined same as startTime. End day will be same day as start time.
@@ -117,7 +117,7 @@ void main() {
   test('adds to calendar when defined endTime and not all day', () async {
     final dateTime = DateTime.now();
     await AddToCalendar.addToCalendar(title: 'title', startTime: dateTime, endTime: dateTime);
-    verify(mockChannel.invokeMethod('addToCalendar', <String, dynamic>{
+    verify(mockChannel!.invokeMethod('addToCalendar', <String, dynamic>{
       'title': 'title',
       'startTime': dateTime.toUtc().millisecondsSinceEpoch,
       'endTime': dateTime.toUtc().millisecondsSinceEpoch,
@@ -130,7 +130,7 @@ void main() {
   test('adds to calendar with provided location information', () async {
     final dateTime = DateTime.now();
     await AddToCalendar.addToCalendar(title: 'title', startTime: dateTime, endTime: dateTime, location: 'location');
-    verify(mockChannel.invokeMethod('addToCalendar', <String, dynamic>{
+    verify(mockChannel!.invokeMethod('addToCalendar', <String, dynamic>{
       'title': 'title',
       'startTime': dateTime.toUtc().millisecondsSinceEpoch,
       'endTime': dateTime.toUtc().millisecondsSinceEpoch,
@@ -144,7 +144,7 @@ void main() {
     final dateTime = DateTime.now();
     await AddToCalendar.addToCalendar(
         title: 'title', startTime: dateTime, endTime: dateTime, description: 'description');
-    verify(mockChannel.invokeMethod('addToCalendar', <String, dynamic>{
+    verify(mockChannel!.invokeMethod('addToCalendar', <String, dynamic>{
       'title': 'title',
       'startTime': dateTime.toUtc().millisecondsSinceEpoch,
       'endTime': dateTime.toUtc().millisecondsSinceEpoch,
@@ -164,7 +164,7 @@ void main() {
       frequency: 2,
       frequencyType: FrequencyType.DAILY,
     );
-    verify(mockChannel.invokeMethod('addToCalendar', <String, dynamic>{
+    verify(mockChannel!.invokeMethod('addToCalendar', <String, dynamic>{
       'title': 'title',
       'startTime': dateTime.toUtc().millisecondsSinceEpoch,
       'endTime': dateTime.toUtc().millisecondsSinceEpoch,

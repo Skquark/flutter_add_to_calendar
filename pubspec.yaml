@@ -4,18 +4,18 @@ version: 1.2.0+1
 homepage: https://github.com/jonyas/flutter_add_to_calendar
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
   flutter: ">=1.10.0 <2.0.0"
 
 dependencies:
-  meta: ^1.1.6
+  meta: ^1.7.0
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  test: ^1.6.3
-  mockito: ^4.1.0
-  matcher: ^0.12.5
+  test:
+  mockito: ^5.0.16
+  matcher: ^0.12.11
   flutter_test:
     sdk: flutter
 
